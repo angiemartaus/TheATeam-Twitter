@@ -5,13 +5,11 @@ class FollowsController < ApplicationController
   end
 
   def create
-    @follow = current_user.follows.new(params[:follower_id])
-    if @follow.save
-      flash[:notice] = "Followed"
-      redirect_to root_path
-    else
-      flash[:notice] = "Follow unsuccessful"
-      redirect_to root_path
+    @user = User.find(params[:id])
+    @current_user.follow(@user)
+    respond_to do |format|
+      format.html{redirect_to :back}
+      format.js {}
     end
   end
 
@@ -19,7 +17,10 @@ class FollowsController < ApplicationController
     @user = User.find(params[:id])
     @current_user.stop_following(@user)
     flash[:notice] = "Unfollowed!"
-    redirect_to root_path
+    respond_to do |format|
+      format.html{redirect_to :back}
+      format.js {render 'create'}
+    end
   end
 
 end

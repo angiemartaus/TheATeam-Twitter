@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
   resources :posts
-  resources :follows, only: [:destroy]
+  resources :follows, only: [:create, :destroy]
   root 'posts#index'
 end
   # The priority is based upon order of creation: first created -> highest priority.

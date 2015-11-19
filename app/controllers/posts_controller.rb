@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    if @current_user
+    if current_user && !(params[:all])
       @posts= Post.timeline(@current_user).page(params[:page]).per(10)
     else
       @posts = Post.order("created_at DESC").page(params[:page]).per(10)
