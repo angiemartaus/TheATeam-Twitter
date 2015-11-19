@@ -13,13 +13,9 @@
   <% end %>
 </div>
 <br>
-<% if @current_user %>
-  <% if @current_user.following?(@user) %>
-    <%= button_to "Unfollow", follow_path(@user), :class => "btn btn-primary", method: :delete %>
-    <% else %>
-    <%= button_to "Follow", follow_user_path, :class => "btn btn-primary", :remote => true %>
-  <% end %>
-<% end %>
+<div class="container" id="buttons">
+  <%= render "follows/button" %>
+</div>
 <br>
 <div class="container">
   <table class="table">
